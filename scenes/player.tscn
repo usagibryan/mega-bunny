@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj26j1teo4nqn"]
+[gd_scene load_steps=9 format=3 uid="uid://bj26j1teo4nqn"]
 
 [ext_resource type="Texture2D" uid="uid://ddvgf8f71886o" path="res://graphics/player/basic/idle.png" id="1_pquii"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_w6t81"]
 [ext_resource type="Texture2D" uid="uid://cj6gjtow55qav" path="res://graphics/player/basic/walk.png" id="3_j7vhy"]
 [ext_resource type="Texture2D" uid="uid://b2gr7vdlvloxn" path="res://graphics/player/gun/idle.png" id="3_xwimw"]
 [ext_resource type="Texture2D" uid="uid://bvjl0ccl18kcp" path="res://graphics/player/gun/walk.png" id="5_wik3r"]
+[ext_resource type="Texture2D" uid="uid://ds284lk6lrnqx" path="res://graphics/bullet/fire.png" id="6_eqcy5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_smq85"]
 animations = [{
@@ -68,13 +69,14 @@ radius = 5.0
 height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_w6t81")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smq85")
-animation = &"idle"
+animation = &"walk_gun"
 autoplay = "idle"
-frame_progress = 0.430983
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7rgtw")
@@ -90,4 +92,22 @@ position_smoothing_speed = 7.0
 wait_time = 0.6
 one_shot = true
 
+[node name="FireTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Fire" type="Node2D" parent="."]
+
+[node name="FireLeft" type="Sprite2D" parent="Fire"]
+visible = false
+position = Vector2(-10.5, 1)
+texture = ExtResource("6_eqcy5")
+flip_h = true
+
+[node name="FireRight" type="Sprite2D" parent="Fire"]
+visible = false
+position = Vector2(10.5, 1)
+texture = ExtResource("6_eqcy5")
+
 [connection signal="timeout" from="Timers/CoolDown" to="." method="_on_cool_down_timeout"]
+[connection signal="timeout" from="Timers/FireTimer" to="." method="_on_fire_timer_timeout"]

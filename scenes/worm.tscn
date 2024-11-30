@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dahm3qdwp0oab"]
+
+[ext_resource type="Script" path="res://scenes/worm.gd" id="1_cdw5o"]
+[ext_resource type="Texture2D" uid="uid://bowtuwt6bn71e" path="res://graphics/Enemies/worm/1.png" id="2_yjvb5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lt1q4"]
+radius = 3.0
+height = 12.0
+
+[node name="Worm" type="Area2D"]
+collision_layer = 4
+collision_mask = 18
+script = ExtResource("1_cdw5o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yjvb5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lt1q4")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -5,7 +5,7 @@ var facing_right := true
 @export var speed = 150
 
 var can_shoot := true
-var has_gun := true
+var has_gun := false
 
 signal shoot(pos: Vector2, direction: bool)
 
@@ -24,10 +24,13 @@ func get_input():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -200
 		
-	if Input.is_action_just_pressed("shoot") and can_shoot:
+	if Input.is_action_just_pressed("shoot") and can_shoot and has_gun:
 		shoot.emit(global_position, facing_right)
 		can_shoot = false
 		$Timers/CoolDown.start()
+		$Timers/FireTimer.start()
+		# FireLeft and FireRight are accessed by indexes 0 an 1
+		$Fire.get_child((facing_right)).show()
 		
 func apply_gravity():
 	velocity.y += 20
@@ -51,3 +54,7 @@ func get_animation():
 		
 func _on_cool_down_timeout() -> void:
 	can_shoot = true
+
+func _on_fire_timer_timeout() -> void:
+	for child in $Fire.get_children():
+		child.hide()

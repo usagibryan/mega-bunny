@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://n7waheg1pgwh"]
+[gd_scene load_steps=9 format=3 uid="uid://n7waheg1pgwh"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_j5nvo"]
 [ext_resource type="Texture2D" uid="uid://c8bijwhpau478" path="res://graphics/level/tilesets/level_tilemap.png" id="1_psl6j"]
 [ext_resource type="PackedScene" uid="uid://bj26j1teo4nqn" path="res://scenes/player.tscn" id="2_7qvlo"]
 [ext_resource type="PackedScene" uid="uid://cfmxa6eijjf4k" path="res://scenes/bee.tscn" id="3_oixhb"]
+[ext_resource type="PackedScene" uid="uid://dahm3qdwp0oab" path="res://scenes/worm.tscn" id="5_bquj7"]
+[ext_resource type="PackedScene" uid="uid://dwjm4wwscde0i" path="res://scenes/gun.tscn" id="5_kthhj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xq66y"]
 texture = ExtResource("1_psl6j")
@@ -71,8 +73,16 @@ position = Vector2(27, 7)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Bee" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(153, 529)
+position = Vector2(118, 8)
+
+[node name="Worm" parent="Enemies" instance=ExtResource("5_bquj7")]
+position = Vector2(55, 12.5)
 
 [node name="Bullets" type="Node2D" parent="."]
+
+[node name="Guns" type="Node2D" parent="."]
+
+[node name="Gun" parent="Guns" instance=ExtResource("5_kthhj")]
+position = Vector2(84, 9)
 
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
