@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bj26j1teo4nqn"]
+
+[ext_resource type="Texture2D" uid="uid://ddvgf8f71886o" path="res://graphics/player/basic/idle.png" id="1_pquii"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_w6t81"]
+[ext_resource type="Texture2D" uid="uid://cj6gjtow55qav" path="res://graphics/player/basic/walk.png" id="3_j7vhy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smq85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pquii")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_j7vhy")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pquii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j7vhy")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7rgtw"]
+radius = 5.0
+height = 14.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_w6t81")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_smq85")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7rgtw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="CoolDown" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="timeout" from="Timers/CoolDown" to="." method="_on_cool_down_timeout"]
