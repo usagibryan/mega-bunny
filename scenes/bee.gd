@@ -15,3 +15,10 @@ func _process(_delta):
 func check_death():
 	if health <= 0:
 		queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	# prevents game from crashing if bee touches terrain
+	# only run this function if the player touches the bee
+	# by looking for the function in the player script
+	if 'get_damage' in body:
+		body.get_damage(10)
