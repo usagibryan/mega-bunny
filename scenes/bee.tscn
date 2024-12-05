@@ -11,6 +11,7 @@ radius = 3.0
 height = 12.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4e0aj"]
+resource_local_to_scene = true
 shader = ExtResource("2_kvly2")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.0
