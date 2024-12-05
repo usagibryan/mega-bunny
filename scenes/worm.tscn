@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2l6lb76hwbya"]
+[gd_scene load_steps=7 format=3 uid="uid://d2l6lb76hwbya"]
 
 [ext_resource type="Script" path="res://scenes/worm.gd" id="1_cdw5o"]
 [ext_resource type="Shader" path="res://scenes/flicker.gdshader" id="2_jfrdn"]
 [ext_resource type="Texture2D" uid="uid://bowtuwt6bn71e" path="res://graphics/Enemies/worm/1.png" id="2_yjvb5"]
+[ext_resource type="AudioStream" uid="uid://ehb0owr23ler" path="res://audio/shot_01.ogg" id="4_oj3gc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pevfq"]
 shader = ExtResource("2_jfrdn")
@@ -25,6 +26,9 @@ texture = ExtResource("2_yjvb5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ew544")
+
+[node name="ShotSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_oj3gc")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

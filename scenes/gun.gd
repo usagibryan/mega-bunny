@@ -6,4 +6,7 @@ func _process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	body.has_gun = true
+	$PowerupSound.play()
+	$Sprite2D.hide()
+	await $PowerupSound.finished
 	queue_free()

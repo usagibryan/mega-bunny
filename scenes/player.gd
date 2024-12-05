@@ -20,12 +20,14 @@ func _process(_delta):
 		
 	velocity.x = direction_x * speed
 	move_and_slide()
+	check_death()
 	
 func get_input():
 	direction_x = Input.get_axis("left", "right")
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = -200
+		velocity.y = -250
+		$Sounds/JumpSound.play()
 		
 	if Input.is_action_just_pressed("shoot") and can_shoot and has_gun:
 		shoot.emit(global_position, facing_right)
@@ -34,6 +36,7 @@ func get_input():
 		$Timers/FireTimer.start()
 		# FireLeft and FireRight are accessed by indexes 0 an 1
 		$Fire.get_child((facing_right)).show()
+		$Sounds/FireSound.play()
 		
 func apply_gravity():
 	velocity.y += 20
@@ -71,6 +74,11 @@ func get_damage(amount):
 		tween.tween_property($AnimatedSprite2D, "material:shader_parameter/amount", 0.0, 0.1).set_delay(0.2)
 		vulnerable = false
 		$Timers/InvincibilityTimer.start()
+		$Sounds/DamageSound.play()
 
 func _on_invincibility_timer_timeout() -> void:
 	vulnerable = true
+
+func check_death():
+	if health <= 0:
+		get_tree().quit()
