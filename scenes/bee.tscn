@@ -1,29 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfmxa6eijjf4k"]
+[gd_scene load_steps=8 format=3 uid="uid://cfmxa6eijjf4k"]
 
 [ext_resource type="Script" path="res://scenes/bee.gd" id="1_8d5f0"]
 [ext_resource type="Texture2D" uid="uid://c8vfbu3ssml0d" path="res://graphics/Enemies/bee/0.png" id="1_88hgn"]
 [ext_resource type="Shader" path="res://scenes/flicker.gdshader" id="2_kvly2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_muwwg"]
-shader = ExtResource("2_kvly2")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/amount = 0.0
+[ext_resource type="Texture2D" uid="uid://ue3v2d7ue3ys" path="res://graphics/Enemies/bee/1.png" id="3_rqldx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ew544"]
 radius = 3.0
 height = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4e0aj"]
+shader = ExtResource("2_kvly2")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpq4v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_88hgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rqldx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Bee" type="Area2D"]
 collision_layer = 4
 collision_mask = 19
 script = ExtResource("1_8d5f0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_muwwg")
-texture = ExtResource("1_88hgn")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ew544")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_4e0aj")
+sprite_frames = SubResource("SpriteFrames_wpq4v")
+autoplay = "default"
+frame_progress = 0.308155
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

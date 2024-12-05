@@ -71,96 +71,18 @@ layer_0/tile_data = PackedInt32Array(2228230, 65536, 2, 2228229, 65536, 2, 22282
 position = Vector2(27, 9)
 
 [node name="Enemies" type="Node2D" parent="."]
+position = Vector2(0, 1)
 
-[node name="Bee" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(118, 8)
+[node name="Bee" parent="Enemies" node_paths=PackedStringArray("marker1", "marker2") instance=ExtResource("3_oixhb")]
+position = Vector2(56, -6)
+marker1 = NodePath("../../BeePathPoints/Marker2D")
+marker2 = NodePath("../../BeePathPoints/Marker2D2")
 
 [node name="Worm" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(56.665, 12.5)
-
-[node name="Bee2" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(109, 225)
-
-[node name="Bee3" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(193, 174)
-
-[node name="Bee4" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(297, 129)
-
-[node name="Bee5" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(416, 215)
-
-[node name="Bee6" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(179, 336)
-
-[node name="Bee7" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(434, 115)
-
-[node name="Bee8" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(346, 66)
-
-[node name="Bee9" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(471, 368)
-
-[node name="Worm2" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(90, 541)
-
-[node name="Worm3" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(165, 541)
-
-[node name="Worm4" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(275, 477)
-
-[node name="Worm5" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(197, 429)
-
-[node name="Worm6" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(132, 397)
-
-[node name="Worm7" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(251, 269)
-
-[node name="Worm8" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(404, 381)
-
-[node name="Worm9" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(392, 269)
-
-[node name="Worm10" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(365, 125)
-
-[node name="Worm11" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(315, 77)
-
-[node name="Bee10" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(392, 581)
-
-[node name="Bee11" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(282, 611)
-
-[node name="Bee12" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(459, 491)
-
-[node name="Bee13" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(31, 337)
-
-[node name="Bee14" parent="Enemies" instance=ExtResource("3_oixhb")]
-position = Vector2(-25, 386)
-
-[node name="Worm12" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(110, 141)
-
-[node name="Worm13" parent="Enemies" instance=ExtResource("5_bquj7")]
-position = Vector2(194, 45)
+position = Vector2(56, 11)
 
 [node name="Gun" parent="Enemies" instance=ExtResource("5_kthhj")]
 position = Vector2(322, 200)
-
-[node name="Gun2" parent="Enemies" instance=ExtResource("5_kthhj")]
-position = Vector2(259, 424)
-
-[node name="Gun3" parent="Enemies" instance=ExtResource("5_kthhj")]
-position = Vector2(76, 585)
 
 [node name="Bullets" type="Node2D" parent="."]
 
@@ -168,5 +90,13 @@ position = Vector2(76, 585)
 
 [node name="Gun" parent="Guns" instance=ExtResource("5_kthhj")]
 position = Vector2(84, 9)
+
+[node name="BeePathPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="BeePathPoints"]
+position = Vector2(111, 2)
+
+[node name="Marker2D2" type="Marker2D" parent="BeePathPoints"]
+position = Vector2(177, -20)
 
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
